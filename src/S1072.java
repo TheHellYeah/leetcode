@@ -8,8 +8,11 @@ public class S1072 {
         Map<Integer, Integer> occurs = new HashMap<>();
 
         for (int i = 0; i < matrix.length; i++) {
-            occurs.merge(Arrays.hashCode(matrix[i]), 1, Integer::sum);
-            occurs.merge(Arrays.hashCode(reverse(matrix[i])), 1, Integer::sum);
+            if (matrix[i][0] == 0) {
+                occurs.merge(Arrays.hashCode(matrix[i]), 1, Integer::sum);
+            } else {
+                occurs.merge(Arrays.hashCode(reverse(matrix[i])), 1, Integer::sum);
+            }
         }
         return occurs.values().stream().max(Integer::compareTo).orElse(0);
     }
